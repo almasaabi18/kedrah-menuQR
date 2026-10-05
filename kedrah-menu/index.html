@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#143f25">
+<title>خدرة — قائمة الأصناف</title>
+<meta name="description" content="قائمة أصناف خدرة: المشروبات الحارة والباردة والمخبوزات والحلويات مع الأسعار والسعرات الحرارية.">
+<link rel="icon" href="assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:Riyal;src:url(assets/Arshid.otf) format('opentype');font-display:swap}
+:root{
+  --g:#1c5731; --g-d:#0f2f1c; --g-m:#174427; --c:#eadfd5;
+  --line:rgba(234,223,213,.16); --soft:rgba(234,223,213,.07);
+  --pad:clamp(16px,4vw,40px);
+  --r:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:'IBM Plex Sans Arabic',system-ui,sans-serif;
+  background:var(--g-d); color:var(--c); min-height:100vh;
+  overflow-x:hidden;
+}
+body::before{
+  content:''; position:fixed; inset:0; z-index:-2;
+  background:
+    radial-gradient(90vw 70vh at 78% -10%, #2a6f42 0%, rgba(42,111,66,0) 60%),
+    radial-gradient(80vw 60vh at 10% 110%, #1f5e36 0%, rgba(31,94,54,0) 65%),
+    linear-gradient(170deg,#174427 0%,#0f2f1c 100%);
+  background-color:#0f2f1c;
+}
+body::after{
+  content:''; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.05;
+  background:url(assets/pattern.svg) repeat; background-size:300px auto;
+}
+
+/* ---------- splash ---------- */
+#splash{position:fixed;inset:0;z-index:999;display:grid;place-items:center;background:#0f2f1c;
+  transition:opacity .7s ease,visibility .7s}
+#splash img{width:min(44vw,210px);animation:pop 1.2s cubic-bezier(.2,.8,.2,1) both}
+#splash.gone{opacity:0;visibility:hidden}
+@keyframes pop{0%{opacity:0;transform:scale(.8) translateY(14px);filter:blur(6px)}60%{filter:blur(0)}100%{opacity:1;transform:none}}
+
+/* ---------- header ---------- */
+header{padding:calc(var(--pad) + env(safe-area-inset-top)) var(--pad) 6px;text-align:center}
+header img{width:min(40vw,150px);display:block;margin:0 auto}
+header p{margin-top:10px;font-size:clamp(12px,3vw,15px);letter-spacing:.22em;opacity:.6;direction:ltr}
+
+/* ---------- tabs ---------- */
+nav{position:sticky;top:0;z-index:40;padding:10px 0 8px;
+  background:linear-gradient(#0f2f1cf2 70%,#0f2f1c00);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+nav.stuck{box-shadow:0 10px 30px -18px #000}
+.tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px var(--pad);scroll-behavior:smooth}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:1px solid var(--line);background:var(--soft);color:var(--c);
+  font:600 15px/1 'IBM Plex Sans Arabic';padding:12px 20px;border-radius:999px;cursor:pointer;
+  transition:transform .25s cubic-bezier(.2,.8,.2,1),background .25s,color .25s,border-color .25s}
+.tab:active{transform:scale(.94)}
+.tab[aria-selected=true]{background:var(--c);color:var(--g);border-color:var(--c)}
+
+/* ---------- search ---------- */
+.search{padding:4px var(--pad) 0;max-width:620px;margin:0 auto}
+.search div{display:flex;align-items:center;gap:10px;background:var(--soft);border:1px solid var(--line);
+  border-radius:999px;padding:0 18px;transition:border-color .25s,background .25s}
+.search div:focus-within{border-color:rgba(234,223,213,.45);background:rgba(234,223,213,.11)}
+.search svg{width:17px;height:17px;flex:none;opacity:.55}
+.search input{flex:1;background:none;border:0;outline:0;color:var(--c);font:500 15px/1 'IBM Plex Sans Arabic';padding:14px 0}
+.search input::placeholder{color:rgba(234,223,213,.42)}
+
+/* ---------- sections ---------- */
+main{padding:0 var(--pad) 90px;max-width:1240px;margin:0 auto}
+section{padding-top:30px;scroll-margin-top:84px}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:16px}
+.sec-h h2{font-size:clamp(23px,5.4vw,34px);font-weight:700}
+.sec-h span{font-size:clamp(10px,2.6vw,12px);letter-spacing:.2em;opacity:.5;direction:ltr}
+.sec-h i{flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+
+.grid{display:grid;gap:11px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:640px){.grid{gap:16px;grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1000px){.grid{grid-template-columns:repeat(4,1fr)}}
+
+/* ---------- card ---------- */
+.card{position:relative;border:1px solid var(--line);background:var(--soft);border-radius:var(--r);
+  overflow:hidden;cursor:pointer;text-align:right;color:inherit;font:inherit;display:flex;flex-direction:column;
+  opacity:0;transform:translateY(26px);
+  transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1),border-color .3s,background .3s}
+.card.in{opacity:1;transform:none}
+.card:active{transform:scale(.975)}
+@media(hover:hover){.card:hover{background:rgba(234,223,213,.12);border-color:rgba(234,223,213,.32)}
+  .card:hover .ph img{transform:scale(1.07)}}
+.ph{position:relative;aspect-ratio:1;overflow:hidden;background:#174427}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.ph::after{content:'';position:absolute;inset:auto 0 0 0;height:55%;
+  background:linear-gradient(#0000,rgba(15,47,28,.82))}
+.kc{position:absolute;top:10px;inset-inline-start:10px;z-index:2;background:rgba(15,47,28,.6);
+  backdrop-filter:blur(6px);border:1px solid rgba(234,223,213,.2);border-radius:999px;
+  padding:5px 11px;font-size:11px;font-weight:600;letter-spacing:.02em}
+.body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:3px;flex:1}
+.nm{font-size:clamp(15px,3.7vw,19px);font-weight:700;line-height:1.3}
+.en{font-size:11px;letter-spacing:.09em;opacity:.5;direction:ltr;text-align:right}
+.prices{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.pr{display:flex;align-items:baseline;gap:5px;background:var(--c);color:var(--g);
+  border-radius:999px;padding:5px 12px;font-weight:700;font-size:16px;line-height:1}
+.pr small{font-size:10.5px;font-weight:600;opacity:.75}
+.ry{font-family:Riyal;font-size:.72em;font-weight:400;transform:translateY(-.03em)}
+
+/* ---------- sheet ---------- */
+#scrim{position:fixed;inset:0;z-index:90;background:rgba(6,20,12,.66);backdrop-filter:blur(7px);
+  opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+#scrim.on{opacity:1;visibility:visible}
+#sheet{position:fixed;z-index:91;inset-inline:0;bottom:0;max-height:92dvh;overflow-y:auto;overscroll-behavior:contain;
+  background:linear-gradient(#1b5230,#113a22);background-color:#113a22;
+  border-radius:28px 28px 0 0;border-top:1px solid rgba(234,223,213,.2);
+  transform:translateY(102%);transition:transform .45s cubic-bezier(.2,.9,.2,1);
+  padding-bottom:calc(26px + env(safe-area-inset-bottom))}
+#sheet.on{transform:none}
+@media(min-width:760px){
+  #sheet{inset:50% auto auto 50%;transform:translate(50%,-46%) scale(.94);opacity:0;
+    inset-inline-start:auto;right:50%;width:min(560px,92vw);border-radius:28px;max-height:88dvh;
+    border:1px solid rgba(234,223,213,.2);transition:transform .4s cubic-bezier(.2,.9,.2,1),opacity .3s}
+  #sheet.on{transform:translate(50%,-50%);opacity:1}
+}
+.grab{width:46px;height:4px;border-radius:9px;background:rgba(234,223,213,.3);margin:11px auto 0}
+@media(min-width:760px){.grab{display:none}}
+#sheet .hero{aspect-ratio:16/10;overflow:hidden;margin:14px 14px 0;border-radius:18px;position:relative}
+#sheet .hero img{width:100%;height:100%;object-fit:cover}
+.sh-body{padding:16px 22px 0}
+.sh-body h3{font-size:clamp(22px,6vw,28px);font-weight:700;line-height:1.25}
+.sh-body .en{font-size:12px;margin-top:3px}
+.flv{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.flv span{border:1px solid var(--line);background:var(--soft);border-radius:999px;padding:7px 16px;font-size:13px;font-weight:600}
+.rows{margin-top:16px;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;background:var(--soft)}
+.row+.row{border-top:1px solid var(--line)}
+.row b{font-size:13.5px;font-weight:600;opacity:.75}
+.row .v{display:flex;align-items:center;gap:12px}
+.row .v em{font-style:normal;font-size:12.5px;opacity:.6}
+.al{margin-top:16px}
+.al u{text-decoration:none;font-size:12.5px;opacity:.6;display:block;margin-bottom:8px}
+.al div{display:flex;gap:7px;flex-wrap:wrap}
+.al span{background:rgba(234,223,213,.14);border-radius:999px;padding:6px 15px;font-size:13px;font-weight:600}
+.note{margin-top:18px;font-size:12.5px;line-height:1.75;opacity:.62}
+#close{position:absolute;top:14px;inset-inline-end:14px;z-index:3;width:36px;height:36px;border-radius:50%;
+  border:1px solid rgba(234,223,213,.25);background:rgba(15,47,28,.6);backdrop-filter:blur(6px);
+  color:var(--c);font-size:19px;line-height:1;cursor:pointer;display:grid;place-items:center}
+#close:active{transform:scale(.9)}
+
+/* ---------- footer ---------- */
+footer{text-align:center;padding:36px var(--pad) calc(40px + env(safe-area-inset-bottom));
+  border-top:1px solid var(--line);margin-top:20px}
+footer img{width:86px;opacity:.85}
+footer p{margin-top:12px;font-size:12.5px;opacity:.55;line-height:1.9}
+footer a{color:inherit;text-decoration:none;letter-spacing:.14em;direction:ltr;display:inline-block;margin-top:4px}
+.empty{text-align:center;padding:60px 0;opacity:.55;font-size:15px}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .card{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div id="splash"><img src="assets/logo.svg" alt="خدرة"></div>
+
+<header>
+  <img src="assets/logo.svg" alt="خدرة">
+  <p>KEDRAH · MENU</p>
+</header>
+
+<nav id="nav"><div class="tabs" id="tabs"></div></nav>
+
+<div class="search">
+  <div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+    <input id="q" type="search" placeholder="ابحث عن صنف…" autocomplete="off" aria-label="بحث">
+  </div>
+</div>
+
+<main id="main"></main>
+
+<footer>
+  <img src="assets/logo.svg" alt="خدرة">
+  <p>الأسعار شاملة ضريبة القيمة المضافة · السعرات الحرارية لكل حصة<br>
+     لديك حساسية من أي مكوّن؟ يسعدنا أن يساعدك الكاشير</p>
+  <a href="https://kedrah.cc">KEDRAH.CC</a>
+</footer>
+
+<div id="scrim"></div>
+<div id="sheet" role="dialog" aria-modal="true" aria-label="تفاصيل الصنف"></div>
+
+<script>
+const CATS=[{k:'hot',ar:'مشروبات حارة',en:'HOT'},{k:'cold',ar:'مشروبات باردة',en:'COLD'},
+            {k:'bakery',ar:'مخبوزات',en:'BAKERY'},{k:'sweets',ar:'حلويات',en:'SWEETS'}];
+const R='<span class="ry">$</span>';
+const $=s=>document.querySelector(s);
+let DATA=[];
+
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function priceChip(s){
+  return `<span class="pr">${s.label?`<small>${esc(s.label)}</small>`:''}${R}${s.price}</span>`;
+}
+function cardHTML(p,i){
+  const k=p.sizes.map(s=>s.kcal).filter(v=>v!=null);
+  const kc=k.length?`<span class="kc">${k.length>1?Math.min(...k)+'–'+Math.max(...k):k[0]} سعرة</span>`:'';
+  return `<button class="card" data-id="${p.id}" style="transition-delay:${Math.min(i,8)*45}ms">
+    <div class="ph">${kc}<img src="${p.img}" alt="${esc(p.ar)}" loading="lazy" decoding="async"></div>
+    <div class="body">
+      <div class="nm">${esc(p.ar)}</div><div class="en">${esc(p.en)}</div>
+      <div class="prices">${p.sizes.map(priceChip).join('')}</div>
+    </div></button>`;
+}
+function render(filter=''){
+  const f=filter.trim().toLowerCase();
+  const list=f?DATA.filter(p=>(p.ar+' '+p.en).toLowerCase().includes(f)):DATA;
+  let html='';
+  for(const c of CATS){
+    const items=list.filter(p=>p.cat===c.k);
+    if(!items.length) continue;
+    html+=`<section id="s-${c.k}"><div class="sec-h"><h2>${c.ar}</h2><span>${c.en}</span><i></i></div>
+      <div class="grid">${items.map(cardHTML).join('')}</div></section>`;
+  }
+  $('#main').innerHTML = html || `<p class="empty">ما لقينا صنف بهذا الاسم</p>`;
+  observe();
+}
+function observe(){
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+  }),{rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.card').forEach(el=>io.observe(el));
+}
+
+/* tabs */
+function buildTabs(){
+  $('#tabs').innerHTML=CATS.map((c,i)=>
+    `<button class="tab" role="tab" data-k="${c.k}" aria-selected="${i===0}">${c.ar}</button>`).join('');
+  $('#tabs').onclick=e=>{
+    const b=e.target.closest('.tab'); if(!b) return;
+    const el=document.getElementById('s-'+b.dataset.k); if(el) el.scrollIntoView({block:'start'});
+  };
+}
+function spy(){
+  const nav=$('#nav'); nav.classList.toggle('stuck',window.scrollY>10);
+  let cur=CATS[0].k;
+  for(const c of CATS){
+    const el=document.getElementById('s-'+c.k);
+    if(el && el.getBoundingClientRect().top<=110) cur=c.k;
+  }
+  document.querySelectorAll('.tab').forEach(t=>{
+    const on=t.dataset.k===cur;
+    if((t.getAttribute('aria-selected')==='true')!==on){
+      t.setAttribute('aria-selected',on);
+      if(on) t.scrollIntoView({inline:'center',block:'nearest'});
+    }
+  });
+}
+
+/* sheet */
+function openSheet(id){
+  const p=DATA.find(x=>x.id==id); if(!p) return;
+  const rows=p.sizes.map(s=>`<div class="row"><b>${s.label?esc(s.label):'السعر'}</b>
+     <span class="v">${s.kcal!=null?`<em>${s.kcal} سعرة</em>`:''}<span class="pr">${R}${s.price}</span></span></div>`).join('');
+  $('#sheet').innerHTML=`<div class="grab"></div>
+    <button id="close" aria-label="إغلاق">✕</button>
+    <div class="hero"><img src="${p.img}" alt="${esc(p.ar)}"></div>
+    <div class="sh-body">
+      <h3>${esc(p.ar)}</h3><div class="en">${esc(p.en)}</div>
+      ${p.flv.length?`<div class="flv">${p.flv.map(f=>`<span>${esc(f)}</span>`).join('')}</div>`:''}
+      <div class="rows">${rows}</div>
+      ${p.al.length?`<div class="al"><u>يحتوي على</u><div>${p.al.map(a=>`<span>${esc(a)}</span>`).join('')}</div></div>`:''}
+      <p class="note">الأسعار شاملة الضريبة · السعرات الحرارية لكل حصة<br>
+         لديك حساسية من أي مكوّن؟ يسعدنا أن يساعدك الكاشير</p>
+    </div>`;
+  $('#scrim').classList.add('on'); $('#sheet').classList.add('on');
+  document.body.style.overflow='hidden';
+  $('#close').onclick=closeSheet;
+}
+function closeSheet(){
+  $('#scrim').classList.remove('on'); $('#sheet').classList.remove('on');
+  document.body.style.overflow='';
+}
+
+/* swipe down to close */
+let y0=null;
+$('#sheet').addEventListener('touchstart',e=>{ if($('#sheet').scrollTop<=0) y0=e.touches[0].clientY; },{passive:true});
+$('#sheet').addEventListener('touchmove',e=>{
+  if(y0===null) return; const d=e.touches[0].clientY-y0;
+  if(d>0){ $('#sheet').style.transition='none'; $('#sheet').style.transform=`translateY(${d}px)`; }
+},{passive:true});
+$('#sheet').addEventListener('touchend',e=>{
+  if(y0===null) return; const d=e.changedTouches[0].clientY-y0; y0=null;
+  $('#sheet').style.transition=''; $('#sheet').style.transform='';
+  if(d>110) closeSheet();
+});
+
+document.addEventListener('click',e=>{
+  const c=e.target.closest('.card'); if(c) openSheet(c.dataset.id);
+});
+$('#scrim').onclick=closeSheet;
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeSheet(); });
+$('#q').addEventListener('input',e=>render(e.target.value));
+addEventListener('scroll',()=>requestAnimationFrame(spy),{passive:true});
+
+fetch('menu-data.json').then(r=>r.json()).then(d=>{
+  DATA=d; buildTabs(); render(); spy();
+  setTimeout(()=>$('#splash').classList.add('gone'),650);
+}).catch(()=>{
+  $('#main').innerHTML='<p class="empty">تعذّر تحميل القائمة</p>';
+  $('#splash').classList.add('gone');
+});
+</script>
+</body>
+</html>
